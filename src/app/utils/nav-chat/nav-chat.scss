@@ -1,0 +1,24 @@
+.nav-chats__chat {
+    cursor: pointer;
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+        background: var(--light-grey-color);
+    }
+}
+
+.nav-chats__chat__content {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+
+    .nav-chats__chat__text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}

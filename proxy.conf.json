@@ -1,0 +1,29 @@
+{
+  "/gigachat-auth-api": {
+    "target": "https://ngw.devices.sberbank.ru:9443",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/gigachat-auth-api": ""
+    },
+    "logLevel": "debug"
+  },
+  "/gigachat-api": {
+    "target": "https://gigachat.devices.sberbank.ru/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/gigachat-api": ""
+    },
+    "logLevel": "debug"
+  },
+  "/yandex-api": {
+    "target": "https://llm.api.cloud.yandex.net/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/yandex-api": ""
+    },
+    "logLevel": "debug"
+  }
+}
