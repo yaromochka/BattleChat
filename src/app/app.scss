@@ -1,7 +1,16 @@
-.aside__nav {
+main {
+    display: flex;
+}
+
+.aside__nav__section {
     width: 15%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     border-right: 1px solid var(--light-grey-color);
+}
+
+.battle__chat__section {
+    width: 85%;
+    height: 100vh;
 }

@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { KeyboardComponent } from "../../utils/keyboard-component/keyboard-component";
 
 @Component({
-  selector: 'app-battle-chat',
+  selector: 'app-chat-arena',
   imports: [KeyboardComponent],
-  templateUrl: './battle-chat.html',
-  styleUrl: './battle-chat.scss'
+  templateUrl: './chat-arena.html',
+  styleUrl: './chat-arena.scss'
 })
-export class BattleChat {
+export class ChatArena {
 
 }

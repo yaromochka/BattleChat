@@ -1,0 +1,53 @@
+.chat__arena__history {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    position: relative;
+    gap: .3rem;
+
+    .chat__arena__messages {
+        display: flex;
+        flex-direction: column-reverse;
+        height: 80%;
+        overflow-y: auto;
+        width: 100%;
+        align-self: center;
+    }
+
+    .chat__arena__message__content {
+        width: 80%;
+        align-self: center;;
+    }
+
+    .chat__arena__message {
+        width: calc(100% - 2rem);
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+
+        .chat__arena__text {
+            display: inline-block;
+            padding: 0.8rem;
+            min-width: 40%;
+            max-width: 70%;
+            width: fit-content;
+            border: 2px solid var(--light-grey-color);
+            border-radius: 1rem;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            line-height: 1.4rem;
+        }
+    }
+
+    .chat__arena__question {
+        align-self: flex-end;
+        text-align: left;
+    }
+}
+
+.chat__arena__keyboard {
+    align-self: center;
+    width: 80%;
+    height: 10%;
+}

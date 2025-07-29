@@ -1,10 +1,13 @@
 <section class="nav__section">
-    <ul>
-        <li><app-nav-chat /></li>
-        <li><app-nav-chat /></li>
-        <li><app-nav-chat /></li>
-        <li><app-nav-chat /></li>
-        <li><app-nav-chat /></li>
+    <article class="nav__section__title" [routerLink]="''">BattleChat</article>
+    <ul class="nav__section__list">
+        @for (chat of chats; track chat.id) {
+        <li>
+            <app-nav-chat [id]="chat.id" [name]="chat.name" />
+        </li>
+        } @empty {
+        <article>Нет чатов</article>
+        }
     </ul>
     <article class="nav__section__footer">
         <article class="nav__section__feedback">

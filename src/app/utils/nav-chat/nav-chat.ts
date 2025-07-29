@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-nav-chat',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './nav-chat.html',
   styleUrl: './nav-chat.scss'
 })
 export class NavChat {
-
+  @Input() id!: number;
+  @Input() name!: string;
 }
