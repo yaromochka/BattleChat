@@ -91,3 +91,12 @@ legend {
 input[type='file'] {
 	max-width: 100%;
 }
+
+textarea {
+	border: none;
+	resize: none;
+}
+
+textarea:focus {
+	outline: none;
+}
