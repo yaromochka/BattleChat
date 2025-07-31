@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -41,7 +42,7 @@ export class GigachatService {
     )
   }
 
-  sendMessage() {
+  sendMessage(message: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -52,27 +53,13 @@ export class GigachatService {
       messages: [
         {
           role: 'user',
-          content: `
-          Ты - учитель математикм, методолог образования и потрясающий популяризатор науки со стажем более 15 лет.
-
-Ты отлично разбираешься в теории познания, психологии обучения и нейробиологии процессов запоминания.
-
-Мне необходимо освоить большой обьем вузовской математики за 5 - 6  месяца: линейная алгебра, поля и кольца, геометрия, статистика, теория вероятностей, камбинаторика и теория графов.
-
-Мне необязательно изучать их досконально, но основные темы я понимать должен. От этого зависит моя карьера.
-
-Какие методики обучения и запоминания мне использовать? Нужно ли учить темы паралелтно? Какие есть лайфхаки для того, что бы взломать систему обучения в мозгу?
-
-Отвечай прямо, честно, не придумывая фактов.
-          `
+          content: message
         }
       ]
     };
 
-    return this.http.post(`/gigachat-api/api/v1/chat/completions`, data, { headers }).subscribe(
-      (res) => {
-        console.log(res)
-      }
-    )
+    return this.http.post<GigachatResponse>(`/gigachat-api/api/v1/chat/completions`, data, { headers })
   }
 }
+
+

@@ -17,7 +17,7 @@
 
     .chat__arena__message__content {
         width: 80%;
-        align-self: center;;
+        align-self: center;
     }
 
     .chat__arena__message {
@@ -29,20 +29,39 @@
         .chat__arena__text {
             display: inline-block;
             padding: 0.8rem;
-            min-width: 40%;
-            max-width: 70%;
-            width: fit-content;
-            border: 2px solid var(--light-grey-color);
-            border-radius: 1rem;
             word-wrap: break-word;
             white-space: pre-wrap;
             line-height: 1.4rem;
         }
+
+      .chat__arena__text__answer {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        border: 2px solid var(--light-grey-color);
+        border-radius: 0.8rem;
+      }
+
+      .chat__arena__answer__content {
+        border: 1px solid var(--light-grey-color);
+        border-radius: 0.8rem;
+        width: 50%;
+        padding: 0.8rem;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        line-height: 1.4rem;
+      }
     }
 
     .chat__arena__question {
         align-self: flex-end;
         text-align: left;
+        min-width: 40%;
+        max-width: 70%;
+        width: fit-content;
+        border: 2px solid var(--light-grey-color);
+        border-radius: 1rem;
     }
 }
 

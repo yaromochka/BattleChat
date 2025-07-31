@@ -1,6 +1,9 @@
-<article class="battle__chat__input">
-    <textarea type="text" placeholder="Спросите что-нибудь"></textarea>
-    <article class="battle__chat__input__submit">
-        <p><img src="/icons/arrow-send-icon.svg"></p>
+<form [formGroup]="keyboardForm">
+  <article class="battle__chat__input">
+    <textarea formControlName="message" placeholder="Спросите что-нибудь"></textarea>
+    <article class="battle__chat__input__submit" (click)="onSubmit()">
+      <p><img src="/icons/arrow-send-icon.svg" alt="arrow"></p>
     </article>
-</article>
+  </article>
+</form>
+

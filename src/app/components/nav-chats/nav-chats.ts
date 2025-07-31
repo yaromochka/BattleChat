@@ -1,11 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavChat } from "../../utils/nav-chat/nav-chat";
-import { RouterLink } from '@angular/router'
-
-type Chat = {
-  id: number,
-  name: string
-}
+import {RouterLink} from '@angular/router'
+import {NavServices} from '../../services/nav-services';
 
 @Component({
   selector: 'app-nav-chats',
@@ -13,19 +9,18 @@ type Chat = {
   templateUrl: './nav-chats.html',
   styleUrl: './nav-chats.scss'
 })
-export class NavChats {
-  chats: Chat[] = [
-    {
-      id: 1,
-      name: 'Название'
-    },
-    {
-      id: 2,
-      name: 'Средняя длина'
-    },
-        {
-      id: 3,
-      name: 'Супер очень длинное название не помещается'
-    }
-  ]
+export class NavChats implements OnInit {
+  chats: Chat[] = [];
+
+  constructor(public navServices: NavServices) {}
+
+  ngOnInit(): void {
+    this.navServices.chats$.subscribe(chats => {
+      this.chats = chats;
+    })
+  }
+
+  onSubmit() {
+    localStorage.clear();
+  }
 }

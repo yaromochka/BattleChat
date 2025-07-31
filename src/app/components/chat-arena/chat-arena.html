@@ -1,33 +1,29 @@
 <section class="chat__arena__history">
-    <article class="chat__arena__messages">
-        <article class="chat__arena__message__content">
-            <article class="chat__arena__message chat__arena__question">
-                <article class="chat__arena__text chat__arena__question">Message</article>
+  <article class="chat__arena__messages">
+    <article class="chat__arena__message__content">
+      @for (message of messages$ | async; track message.text) {
+        @if (message.sender === 'user') {
+          <article class="chat__arena__message">
+            <article class="chat__arena__text chat__arena__question">
+              {{ message.text }}
             </article>
-            <article class="chat__arena__message chat__arena__question">
-                <article class="chat__arena__text chat__arena__question">
-                    MessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessage
-                </article>
+          </article>
+        } @else {
+          <article class="chat__arena__message">
+            <article class="chat__arena__text chat__arena__text__answer">
+              <article class="chat__arena__answer__content chat__arena__answer__first">
+                {{ message.text }}
+              </article>
+              <article class="chat__arena__answer__content chat__arena__answer__second">
+                {{ message.text }}
+              </article>
             </article>
-            <article class="chat__arena__message chat__arena__answer">
-                <article class="chat__arena__text">Answer</article>
-            </article>
-            <article class="chat__arena__message chat__arena__answer">
-                <article class="chat__arena__text">
-                    AnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerv
-                </article>
-            </article>
-            <article class="chat__arena__message">
-                <article class="chat__arena__text chat__arena__question">
-                    MessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessageMessage
-                </article>
-            </article>
-            <article class="chat__arena__message">
-                <article class="chat__arena__text chat__arena__question">Это последнее сообщение</article>
-            </article>
-        </article>
+          </article>
+        }
+      }
     </article>
-    <article class="chat__arena__keyboard">
-        <app-keyboard-component />
-    </article>
+  </article>
+  <article class="chat__arena__keyboard">
+    <app-keyboard-component />
+  </article>
 </section>
