@@ -9,7 +9,7 @@
     "logLevel": "debug"
   },
   "/gigachat-api": {
-    "target": "https://gigachat.devices.sberbank.ru/",
+    "target": "https://gigachat.devices.sberbank.ru",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
@@ -17,8 +17,17 @@
     },
     "logLevel": "debug"
   },
+    "/yandex-auth-api": {
+    "target": "https://iam.api.cloud.yandex.net/iam",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/yandex-auth-api": ""
+    },
+    "logLevel": "debug"
+  },
   "/yandex-api": {
-    "target": "https://llm.api.cloud.yandex.net/",
+    "target": "https://llm.api.cloud.yandex.net",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {

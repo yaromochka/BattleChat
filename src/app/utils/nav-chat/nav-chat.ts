@@ -1,4 +1,4 @@
-import {Component, Input, numberAttribute} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { RouterLink } from '@angular/router'
 
 @Component({
@@ -8,6 +8,6 @@ import { RouterLink } from '@angular/router'
   styleUrl: './nav-chat.scss'
 })
 export class NavChat {
-  @Input({transform: numberAttribute}) id!: number;
+  @Input() id!: string;
   @Input() name!: string;
 }

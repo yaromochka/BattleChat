@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {NavServices} from '../../services/nav-services';
-import {GigachatService} from '../../services/gigachat-service';
-import {ChatServices} from '../../services/chat-services';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NavServices } from '../../services/nav-services';
+import { GigachatService } from '../../services/gigachat-service';
+import { ChatServices } from '../../services/chat-services';
 
 const UUID_REGEXP = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
 
@@ -35,11 +35,16 @@ export class KeyboardComponent {
       sender: 'user'
     };
 
+    const lastElemenetInUrl = this.router.url.split('/').pop()!
+
     const UUID = UUID_REGEXP.test(this.router.url)
-      ? this.router.url.split('/').pop()!
+      ? lastElemenetInUrl
       : this.createNewChat(message);
 
-    this.updateLocalChat(UUID, userMessage)
+    if (lastElemenetInUrl.match(UUID_REGEXP)) {
+      this.updateLocalChat(UUID, userMessage)
+      this.chatService.addMessage(userMessage);
+    }
 
     this.gigachatService.sendMessage(message).subscribe(res => {
       const botAnswer: Message = {
@@ -48,6 +53,7 @@ export class KeyboardComponent {
       };
 
       this.updateLocalChat(UUID, botAnswer);
+      this.chatService.addMessage(botAnswer);
     });
   }
 

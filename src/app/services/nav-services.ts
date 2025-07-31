@@ -18,7 +18,7 @@ export class NavServices {
 
   addChat(chat: Chat): void {
     const chats = this.loadChats();
-    chats.push(chat);
+    chats.unshift(chat);
     localStorage.setItem('chats', JSON.stringify(chats));
     this.chatsSubject.next(chats);
   }
