@@ -37,13 +37,13 @@ export class KeyboardComponent {
       sender: 'user'
     };
 
-    const lastElemenetInUrl = this.router.url.split('/').pop()!
+    const lastElementInUrl = this.router.url.split('/').pop()!
 
     const UUID = UUID_REGEXP.test(this.router.url)
-      ? lastElemenetInUrl
+      ? lastElementInUrl
       : this.createNewChat(message);
 
-    if (lastElemenetInUrl.match(UUID_REGEXP)) {
+    if (lastElementInUrl.match(UUID_REGEXP)) {
       this.updateLocalChat(UUID, userMessage)
       this.chatService.addMessage([userMessage]);
     }
