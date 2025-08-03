@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NavServices } from '../../services/nav-services';
 import { GigachatService } from '../../services/gigachat-service';
 import { ChatServices } from '../../services/chat-services';
+import { YandexService } from '../../services/yandex-service';
+import { forkJoin } from 'rxjs';
 
 const UUID_REGEXP = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
 
@@ -18,7 +20,7 @@ const UUID_REGEXP = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12
 export class KeyboardComponent {
   keyboardForm: FormGroup;
 
-  constructor(private chatService: ChatServices, private fb: FormBuilder, private router: Router, private navServices: NavServices, private gigachatService: GigachatService) {
+  constructor(private chatService: ChatServices, private fb: FormBuilder, private router: Router, private navServices: NavServices, private gigachatService: GigachatService, private yandexService: YandexService) {
     this.keyboardForm = this.fb.group({
       message: ['']
     });
@@ -43,18 +45,26 @@ export class KeyboardComponent {
 
     if (lastElemenetInUrl.match(UUID_REGEXP)) {
       this.updateLocalChat(UUID, userMessage)
-      this.chatService.addMessage(userMessage);
+      this.chatService.addMessage([userMessage]);
     }
 
-    this.gigachatService.sendMessage(message).subscribe(res => {
+    forkJoin([
+      this.gigachatService.sendMessage(message),
+      this.yandexService.sendMessage(message)
+    ]).subscribe(([gigaResponse, yandexResponse]) => {
+      const answers = [
+        gigaResponse.choices[0].message.content,
+        yandexResponse.result.alternatives[0].message.text
+      ];
+
       const botAnswer: Message = {
-        text: res.choices[0].message.content,
+        text: answers,
         sender: 'bot'
       };
 
+      this.chatService.addMessage([botAnswer]);
       this.updateLocalChat(UUID, botAnswer);
-      this.chatService.addMessage(botAnswer);
-    });
+    });;
   }
 
   createNewChat(message: string): string {
@@ -74,7 +84,7 @@ export class KeyboardComponent {
 
   private updateLocalChat(UUID: string, message: Message) {
     const chats = JSON.parse(localStorage.getItem('chats') || '[]');
-    const chatIndex = chats.findIndex((c: any) => c.id === UUID);
+    const chatIndex = chats.findIndex((c: Chat) => c.id === UUID);
     if (chatIndex !== -1) {
       chats[chatIndex].messages.push(message);
       localStorage.setItem('chats', JSON.stringify(chats));

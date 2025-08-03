@@ -1,4 +1,5 @@
 type Message = {
-  text: string;
-  sender: 'user' | 'bot' | string;
+  text: string | string[];
+  sender: 'user' | 'bot' | 'assistant' | string;
 };
+ 

@@ -19,7 +19,7 @@ export class ChatArena implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(() => {
       this.loadData(); 
     });
   }
@@ -27,7 +27,7 @@ export class ChatArena implements OnInit {
   loadData() {
     const UUID = this.router.url.split('/').pop()!;
     const chats = JSON.parse(localStorage.getItem('chats') || '[]');
-    const currentChat = chats.find((c: any) => c.id === UUID);
+    const currentChat = chats.find((c: Chat) => c.id === UUID);
 
     if (currentChat) {
       this.chatService.setMessages(currentChat.messages);

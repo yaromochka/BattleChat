@@ -15,6 +15,5 @@ export class App {
 
   constructor(gigachat: GigachatService, yandexGPT: YandexService) {
     gigachat.getModels()
-    yandexGPT.testConnection().subscribe((res) => console.log(res));
   }
 }

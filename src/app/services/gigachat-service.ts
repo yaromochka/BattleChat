@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import {Observable} from 'rxjs';
-
+import { ChatServices } from './chat-services';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GigachatService {
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private chatService: ChatServices) {
+  }
 
   async getToken(): Promise<string> {
     const rqUID: string = crypto.randomUUID();
@@ -43,6 +44,8 @@ export class GigachatService {
   }
 
   sendMessage(message: string) {
+    const messagesHistory = this.chatService.getMessagesHistory();
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -51,15 +54,16 @@ export class GigachatService {
     const data = {
       model: 'GigaChat-2',
       messages: [
-        {
-          role: 'user',
-          content: message
-        }
-      ]
-    };
+        ...messagesHistory.map(msg => ({
+          role: msg.sender === 'user' ? 'user' : 'assistant',
+          text: Array.isArray(msg.text) ? msg.text.join('\n') : msg.text
+        }) as BotRequest),
+        { role: 'user', text: message }
+      ]}
+    console.log(data)
 
     return this.http.post<GigachatResponse>(`/gigachat-api/api/v1/chat/completions`, data, { headers })
+    }
   }
-}
 
 

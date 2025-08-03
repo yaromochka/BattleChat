@@ -14,7 +14,6 @@ export const authYandexInterceptor: HttpInterceptorFn = (req, next) => {
   return from(gigachatService.getToken()).pipe(
     switchMap((response: YandexAuthResponse) => {
       const token = response.iamToken;
-      console.log('Яндекс токен', token)
       if (!token) {
         throw new Error('Не удалось получить токен Yandex');
       }
