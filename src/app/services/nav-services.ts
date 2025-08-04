@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Injectable, signal} from '@angular/core';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavServices {
-  private chatsSubject = new BehaviorSubject<Chat[]>(this.loadChats());
-
-  get chats$(): Observable<Chat[]> {
-    return this.chatsSubject.asObservable();
-  }
+  private chatsSignal = signal<Chat[]>(this.loadChats());
+  public chats$ = toObservable(this.chatsSignal)
 
   private loadChats(): Chat[] {
     const stored = localStorage.getItem('chats');
@@ -20,6 +17,6 @@ export class NavServices {
     const chats = this.loadChats();
     chats.unshift(chat);
     localStorage.setItem('chats', JSON.stringify(chats));
-    this.chatsSubject.next(chats);
+    this.chatsSignal.set(chats);
   }
 }

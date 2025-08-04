@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavServices } from '../../services/nav-services';
@@ -15,12 +15,13 @@ const UUID_REGEXP = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12
     ReactiveFormsModule
   ],
   templateUrl: './keyboard-component.html',
-  styleUrl: './keyboard-component.scss'
+  styleUrl: './keyboard-component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KeyboardComponent {
   keyboardForm: FormGroup;
 
-  constructor(private chatService: ChatServices, private fb: FormBuilder, private router: Router, private navServices: NavServices, private gigachatService: GigachatService, private yandexService: YandexService) {
+  constructor(private chatService: ChatServices, private fb: FormBuilder, private router: Router, private navServices: NavServices, private gigachatService: GigachatService, private yandexService: YandexService, private cdr: ChangeDetectorRef) {
     this.keyboardForm = this.fb.group({
       message: ['']
     });
@@ -64,7 +65,8 @@ export class KeyboardComponent {
 
       this.chatService.addMessage([botAnswer]);
       this.updateLocalChat(UUID, botAnswer);
-    });;
+      this.cdr.markForCheck();
+    });
   }
 
   createNewChat(message: string): string {

@@ -1,26 +1,27 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { KeyboardComponent } from "../../utils/keyboard-component/keyboard-component";
 import {ActivatedRoute, Router} from '@angular/router';
 import {ChatServices} from '../../services/chat-services';
-import {AsyncPipe} from '@angular/common';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-chat-arena',
-  imports: [KeyboardComponent, AsyncPipe],
+  imports: [KeyboardComponent],
   templateUrl: './chat-arena.html',
-  styleUrl: './chat-arena.scss'
+  styleUrl: './chat-arena.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatArena implements OnInit {
-  messages$: Observable<Message[]>;
+  messages: Message[] = [];
 
-  constructor(private chatService: ChatServices, private router: Router, private route: ActivatedRoute) {
-    this.messages$ = this.chatService.messages$
-  }
+  constructor(private chatService: ChatServices, private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.chatService.messages$.subscribe(messages => {
+      this.messages = messages;
+      this.cdr.detectChanges();
+    });
     this.route.params.subscribe(() => {
-      this.loadData(); 
+      this.loadData();
     });
   }
 

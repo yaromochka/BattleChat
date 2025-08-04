@@ -1,7 +1,7 @@
 <section class="chat__arena__history">
   <article class="chat__arena__messages">
     <article class="chat__arena__message__content">
-      @for (message of messages$ | async; track message.text) {
+      @for (message of messages; track message.text) {
       @if (message.sender === 'user') {
       <article class="chat__arena__message">
         <article class="chat__arena__text chat__arena__question">
