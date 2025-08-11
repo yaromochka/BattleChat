@@ -4,6 +4,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { authYandexInterceptor } from './auth-yandex-interceptor';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 describe('authYandexInterceptorInterceptor', () => {
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -21,6 +22,10 @@ describe('authYandexInterceptorInterceptor', () => {
 describe('authYandexInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) => 
 >>>>>>> 6bd3732 (feat: merge)
+=======
+describe('authYandexInterceptorInterceptor', () => {
+  const interceptor: HttpInterceptorFn = (req, next) =>
+>>>>>>> 22fcc08 (feat: make tests to chat service)
     TestBed.runInInjectionContext(() => authYandexInterceptor(req, next));
 
   beforeEach(() => {
