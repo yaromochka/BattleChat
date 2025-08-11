@@ -1,4 +1,4 @@
-import { HttpClient, HttpInterceptorFn } from '@angular/common/http';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { GigachatService } from '../services/gigachat-service';
 import { catchError, from, switchMap, throwError } from 'rxjs';
