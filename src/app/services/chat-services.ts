@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ChatServices {
-  private messagesSignal = signal<Message[]>([]);
+  public messagesSignal = signal<Message[]>([]);
 
   public messages$: Observable<Message[]> = toObservable(this.messagesSignal);
 
