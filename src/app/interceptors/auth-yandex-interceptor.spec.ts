@@ -4,7 +4,11 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { authYandexInterceptor } from './auth-yandex-interceptor';
 
 describe('authYandexInterceptorInterceptor', () => {
+<<<<<<< HEAD
   const interceptor: HttpInterceptorFn = (req, next) =>
+=======
+  const interceptor: HttpInterceptorFn = (req, next) => 
+>>>>>>> 35bdeac (feat: add nx)
     TestBed.runInInjectionContext(() => authYandexInterceptor(req, next));
 
   beforeEach(() => {

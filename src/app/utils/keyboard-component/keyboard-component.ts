@@ -65,7 +65,7 @@ export class KeyboardComponent {
 
       this.chatService.addMessage([botAnswer]);
       this.updateLocalChat(UUID, botAnswer);
-      this.cdr.markForCheck();
+      this.cdr.detectChanges();
     });
   }
 
@@ -90,6 +90,7 @@ export class KeyboardComponent {
     if (chatIndex !== -1) {
       chats[chatIndex].messages.push(message);
       localStorage.setItem('chats', JSON.stringify(chats));
+      this.cdr.markForCheck();
     }
   }
 }
